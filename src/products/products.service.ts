@@ -13,4 +13,14 @@ export class ProductsService {
         const newProduct= new this.productModel(createProductDto);
         return newProduct.save();
     }
+    getProducts(){
+        return this.productModel.find();
+    }
+
+    // get one product using the id
+    getProductById(id:string){
+        return this.productModel.findById(id);
+
+    }
+
 }
