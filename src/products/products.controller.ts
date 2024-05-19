@@ -9,20 +9,20 @@ export class ProductsController {
 
     // create a new product
     @Post()
-    createProduct(@Body()createProductdto:CreateProductDto){
-        return this.ProductsService.createProduct(createProductdto);
+    async createProduct(@Body()createProductdto:CreateProductDto){
+        return await this.ProductsService.createProduct(createProductdto);
     }
 
     // find all products
     @Get()
-    getProducts(){
-        return this.ProductsService.getProducts();
+    async getProducts(){
+        return await  this.ProductsService.getProducts();
     }
 
     // find a single product using the id
     @Get(':id')
-     getProductById(@Param('id')id:string){
-        const findProduct= this.ProductsService.getProductById(id);
+    async  getProductById(@Param('id')id:string){
+        const findProduct= await this.ProductsService.getProductById(id);
         if(!findProduct)
             {
                 throw new HttpException("product not found",404);
@@ -32,19 +32,21 @@ export class ProductsController {
 
     // update a product
     @Patch(":id")
-    updateProduct(@Param('id')id:string,@Body()updateproductdto:UpdateProductDto)
+    async updateProduct(@Param('id')id:string,@Body()updateproductdto:UpdateProductDto)
     {
-        const updatedProduct=this.ProductsService.updateProduct(id,updateproductdto);
+        const updatedProduct=await this.ProductsService.updateProduct(id,updateproductdto);
         if(!updatedProduct)
             throw new HttpException("product not found",404);
         return updatedProduct;
     }
 
     @Delete(":id")
-    deleteproduct(@Param("id")id:string)
+    async  deleteproduct(@Param("id")id:string)
     {
-        const deletedProduct=this.ProductsService.deleteProduct(id);
-        return deletedProduct;
+        const deletedProduct= await this.ProductsService.deleteProduct(id);
+        if(!deletedProduct)
+            throw new HttpException("product not found",404);
+        return {message:'the product is successfully deleted'};
     }
 
 }
