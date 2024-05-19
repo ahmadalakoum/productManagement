@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional } from "class-validator";
 
 export class UpdateProductDto{
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     productPrice?:number;
 
     @IsNumber()
-    @IsNotEmpty()
+    @IsOptional()
     quantity?:number;
 }
