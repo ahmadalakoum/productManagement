@@ -23,10 +23,17 @@ export class ProductsService {
         return this.productModel.findById(id);
 
     }
-
+    // update a single product
     updateProduct(id:string,updateproductDto:UpdateProductDto)
     {
         return this.productModel.findByIdAndUpdate(id,updateproductDto);
     }
+    // delete product
+    deleteProduct(id:string)
+    {
+        return this.productModel.findByIdAndDelete(id);
+    }
+
+
 
 }

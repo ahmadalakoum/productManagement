@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, Param, Patch, Post } from '@nestjs/common';
 import { CreateProductDto } from 'src/dto/createProduct.dto';
 import { ProductsService } from './products.service';
 import { UpdateProductDto } from 'src/dto/updateProduct.dto';
@@ -38,6 +38,13 @@ export class ProductsController {
         if(!updatedProduct)
             throw new HttpException("product not found",404);
         return updatedProduct;
+    }
+
+    @Delete(":id")
+    deleteproduct(@Param("id")id:string)
+    {
+        const deletedProduct=this.ProductsService.deleteProduct(id);
+        return deletedProduct;
     }
 
 }
